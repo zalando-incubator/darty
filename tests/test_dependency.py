@@ -42,21 +42,21 @@ class TestDependency(unittest.TestCase):
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.0',
-            'working-dir': 'working_dir1',
+            'workingDir': 'working_dir1',
         })
 
         dep_working_dir_doesnt_exist = self._get_dependency({
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.0',
-            'working-dir': 'working_dir_doesnt_exist',
+            'workingDir': 'working_dir_doesnt_exist',
         })
 
         dep_files = self._get_dependency({
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.0',
-            'working-dir': 'working_dir1',
+            'workingDir': 'working_dir1',
             'files': [
                 'file1.txt',
                 'file2.txt',
@@ -145,14 +145,14 @@ class TestDependency(unittest.TestCase):
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.1',
-            'working-dir': 'working_dir1',
+            'workingDir': 'working_dir1',
         })
 
         dep_to_update = self._get_dependency({
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.1',
-            'working-dir': 'working_dir_update',
+            'workingDir': 'working_dir_update',
         })
 
         # dependency paths
@@ -278,7 +278,7 @@ class TestDependency(unittest.TestCase):
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.1',
-            'working-dir': 'working_dir1',
+            'workingDir': 'working_dir1',
             'files': [
                 'subdir1/file1.txt',
             ]
@@ -288,7 +288,7 @@ class TestDependency(unittest.TestCase):
             'group': 'group1.subgroup1',
             'artifact': 'artifact1',
             'version': '1.1',
-            'working-dir': 'working_dir1',
+            'workingDir': 'working_dir1',
             'files': [
                 'file_doesnt_exist.txt',
             ]
@@ -308,6 +308,7 @@ class TestDependency(unittest.TestCase):
         # publish package locally
         dep_to_publish.publish(local=True)
 
+        # TODO: fix paths logic and tests for Windows
         published_files = list(list_dir_files(dep_without_working_dir.get_path()))
         self.assertEqual(published_files, dep_to_publish.files)
 

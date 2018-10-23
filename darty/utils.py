@@ -92,3 +92,10 @@ def get_dir_hash(path: str):
                     sha_hash.update(hashlib.sha1(buf).hexdigest().encode('utf-8'))
 
     return sha_hash.hexdigest()
+
+
+def convert_path_w2u(path):
+    """Converts path from Windows style to Unix style.
+    If the path was already written in Unix style it remains unchanged.
+    """
+    return path.replace('\\', '/')

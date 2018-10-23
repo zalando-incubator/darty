@@ -7,7 +7,7 @@ from darty.package.package_info import PackageInfo
 from darty.package.repository import Repository
 from darty.package.validators import check_group_name, check_artifact_name, check_version_number, \
      check_files_file_path
-from darty.utils import file_exists, dir_exists, get_dir_hash, is_dir_empty, copy_dir, copy_file
+from darty.utils import file_exists, dir_exists, get_dir_hash, is_dir_empty, copy_dir, copy_file, convert_path_w2u
 
 
 class Dependency(object):
@@ -27,9 +27,9 @@ class Dependency(object):
         self.group = config.get('group', '')
         self.artifact = config.get('artifact', '')
         self.version = config.get('version', '')
-        self.working_dir = config.get('working-dir', None)
+        self.working_dir = config.get('workingDir', None)
         self.files = config.get('files', None)
-        self.default_file = config.get('default-file', None)
+        self.default_file = config.get('defaultFile', None)
         self.name = config.get('name', '')
         self.description = config.get('description', '')
 
@@ -132,7 +132,7 @@ class Dependency(object):
         # convert relative path from windows format to linux one
         # because only linux format is accepted for file paths in "files"
         if file_path:
-            file_path = file_path.replace('\\', '/')
+            file_path = convert_path_w2u(file_path)
 
         # return a working directory if "file_path" is not specified and the directory is not empty
         if self.working_dir and not file_path and not self.files:

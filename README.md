@@ -61,7 +61,7 @@ Dependency configuration:
 - __“group”__: the id of the data group.
 - __“artifact”__: the name of the package under the specified group.
 - __“version”__: the version of the package under the specified group.
-- __“working-dir”__ _(optional)_: this directory is being used to work with package files directly from the project 
+- __“workingDir”__ _(optional)_: this directory is being used to work with package files directly from the project 
 and to publish the new version of the package.
 - __“files”__ _(optional)_: list of files which belong to the package. It can be used to specify particular files 
 which should be copied to the working directory ignoring other ones. Or it can be used to scope the list of files 

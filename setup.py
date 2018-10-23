@@ -17,7 +17,6 @@ setup(
     scripts=['bin/darty'],
     entry_points={
         'darty_drivers': [
-            'test = darty.drivers.test.driver:TestDriver',
             's3_files = darty.drivers.s3.files.driver:S3FilesDriver',
             's3_zip = darty.drivers.s3.zip.driver:S3ZipDriver',
         ],
