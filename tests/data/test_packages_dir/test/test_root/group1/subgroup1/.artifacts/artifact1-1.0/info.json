@@ -1,0 +1,10 @@
+{
+  "group": "group1.subgroup1",
+  "artifact": "artifact1",
+  "version": "1.0",
+  "files": [
+    "file1.txt",
+    "file2.txt",
+    "subdir1/file1.txt"
+  ]
+}

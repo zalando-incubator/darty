@@ -1,0 +1,8 @@
+repositories:
+  default:
+    type: test
+    root: test
+
+dependencies:
+  - group: group
+    artifact: artifact

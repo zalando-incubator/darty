@@ -1,0 +1,6 @@
+repositories:
+  default:
+    type: test
+    root: test
+
+dependencies: []

@@ -1,0 +1,5 @@
+repositories: {}
+dependencies:
+    group: group
+    artifact: artifact
+    version: 1.0

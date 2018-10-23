@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+
+import argparse
+import logging
+import sys
+import darty
+from darty.commands.configure import ConfigureCommand
+from darty.commands.publish import PublishCommand
+from darty.commands.publish_local import PublishLocalCommand
+from darty.commands.update import UpdateCommand
+from darty.commands.download import DownloadCommand
+from darty.output_writer import OutputWriter
+from darty.settings import get_settings
+
+
+# list of existing commands
+commands_classes = [
+    ConfigureCommand,
+    PublishCommand,
+    PublishLocalCommand,
+    UpdateCommand,
+    DownloadCommand,
+]
+
+# build the parser
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--profile', type=str, default='default', help='Settings profile')
+parser.add_argument('-d', '--debug', action='store_true', help='Show debug messages')
+parser.add_argument('--version', action='store_true', help='Display the version of this tool')
+
+# build subparsers
+subparsers = parser.add_subparsers()
+
+for command_class in commands_classes:
+    # create a subparser
+    subparser = subparsers.add_parser(command_class.get_command_name(), help=command_class.get_description())
+
+    # create a sub-command
+    try:
+        command = command_class()
+    except ValueError as e:
+        parser.print_usage()
+        print(e)
+        sys.exit(1)
+
+    # configure a sub-parser for a sub-command
+    command.configure(subparser)
+    subparser.set_defaults(command_object=command, command_subparser=subparser)
+
+# parse arguments
+args = parser.parse_args()
+
+# logging
+logging_level = logging.DEBUG if args.debug else logging.WARNING
+logging.basicConfig(level=logging_level, format='%(levelname)s %(message)s')
+
+# output writer
+output = OutputWriter()
+
+# display the version of the tool
+display_version = args.version
+if display_version:
+    output.write(darty.__version__)
+    sys.exit(0)
+
+# check that some command was called
+if not hasattr(args, 'command_object'):
+    parser.print_usage()
+    sys.exit(1)
+
+# get settings
+settings = get_settings(args.profile)
+
+# run a command
+try:
+    res = args.command_object.run(args, settings, output)
+except ValueError as e:
+    output.write('')
+    args.command_subparser.print_usage()
+    output.write('-----')
+    output.write(str(e))
+    output.write('-----')
+    sys.exit(1)
+except KeyboardInterrupt:
+    sys.exit(1)
+
+if not res:
+    sys.exit(1)

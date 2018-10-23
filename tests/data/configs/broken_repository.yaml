@@ -1,0 +1,8 @@
+repositories:
+  default:
+    root: test
+
+dependencies:
+  - group: group
+    artifact: artifact
+    version: 1.0
