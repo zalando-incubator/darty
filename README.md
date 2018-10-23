@@ -50,7 +50,7 @@ __“repositories”__ section is a dictionary of repositories where keys are na
 configurations.
 
 Repository configuration:
-- __“type”__: name of the repository driver (see "[Darty Drivers](#Darty-Drivers)" section)
+- __“type”__: name of the repository driver (see "[Darty Drivers](#darty-drivers)" section)
 - __“root”__: unique identificator inside the repository. Meaning of this value is different for 
 different types of repositories. For Amazon S3 it’s a bucket name.
 - __“parameters”__: custom parameters for the repository driver.
@@ -280,7 +280,7 @@ flag, without files by default; or print "Not installed")
 
 ## Contributing
 Darty welcomes contributions from the open source community. To get started, take a look at our 
-[contributing guidelines](CONTRIBUTING.md). Then check our [Project Board](https://github.com/zalando/darty/projects/1) and [Issues Tracker](https://github.com/zalando/darty/issues) for ideas.
+[contributing guidelines](CONTRIBUTING.md), then check the [Issues Tracker](https://github.com/zalando-incubator/darty/issues) for ideas.
 
 
 ## Contact
